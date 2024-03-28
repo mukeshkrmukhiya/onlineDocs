@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/models/db.js", "app/models/todos.js", "app/api/todo/[id]/route.js", "app/api/todo/route.js", "app/components/loader/loader.jsx", "app/components/todo/createTodo.jsx", "app/components/todo/todoCard.jsx", "app/components/todo/todoList.jsx", "app/components/servicesCard.jsx", "app/home/page.jsx", "app/newdocs/page.jsx", "app/ourServices/page.jsx", "app/todo/page.jsx", "app/navbar.jsx", "app/alldocs/page.jsx", "app/page.jsx"],
+  "exclude": ["node_modules"]
+}

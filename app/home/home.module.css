@@ -1,0 +1,22 @@
+.home::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 94vh;
+    background-image: url('/homeimg1.jpeg'); /* Path to your background image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background */
+    z-index: -1; /* Place behind other content */
+    opacity: 0.9; /* Adjust the opacity to control the darkness */
+    filter: blur(5px); /* Apply blur effect */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .home::before {
+        height: auto; /* Auto height for smaller screens */
+        min-height: 26rem; /* Minimum height to cover the viewport */
+    }
+}
