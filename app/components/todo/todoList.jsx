@@ -12,6 +12,7 @@ const TodoList = () => {
     const [todos, setTodos] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editTodo, setEditTodo] = useState(null);
+    const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchTodos();
@@ -25,6 +26,7 @@ const TodoList = () => {
             }
             const data = await response.json();
             setTodos(data.todos);
+            setLoading(false);
         } catch (error) {
             console.error('Error fetching todos:', error.message);
         }
@@ -115,7 +117,7 @@ const TodoList = () => {
     // }
     const sortedTodos = todos.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    if (todos === null || todos.length === 0) {
+    if (Loading) {
         return (<div className='flex items-center justify-center h-screen'>
             <Loader />
         </div>

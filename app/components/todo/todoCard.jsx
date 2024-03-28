@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdEditRoad } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
 
@@ -7,12 +7,15 @@ const TodoCard = ({ todo, onUpdate, onDelete, onEdit }) => {
     const [editedTodo, setEditedTodo] = useState({
         ...todo,
     });
+    
 
     const handleCheckboxChange = () => {
         const updatedTodo = { ...editedTodo, completed: !editedTodo.completed };
         setEditedTodo(updatedTodo);
-        onUpdate(updatedTodo);
     };
+
+    
+    
 
     const handleEdit = () => {
         onEdit(todo);
@@ -66,9 +69,13 @@ const TodoCard = ({ todo, onUpdate, onDelete, onEdit }) => {
 
 
     const getTotalTime = () => {
+        const currentTime = new Date();
         const startTime = new Date(editedTodo.startAt);
         const endTime = new Date(editedTodo.endAt);
-        const diffMs = endTime - startTime;
+        const diffs = endTime - startTime;
+        const diffc = endTime - currentTime;
+        var diffMs = Math.min(diffs, diffc);
+
     
         // Convert milliseconds to minutes, hours, and days
         const totalMinutes = Math.floor(diffMs / (1000 * 60));
@@ -79,11 +86,25 @@ const TodoCard = ({ todo, onUpdate, onDelete, onEdit }) => {
             return `${totalDays} d`;
         } else if (totalHours > 0) {
             return `${totalHours} h`;
-        } else {
+        } else if(totalMinutes > 0) {
             return `${totalMinutes} m`;
+        }else{
+            return "0s";
+
         }
     };
     
+    useEffect(() => {
+       const remainingTime =  getTotalTime(); 
+          
+        const interval = setInterval(() => {
+            if(remainingTime === '0s'){
+                handleCheckboxChange();
+               }
+          console.log('One minute has passed');
+        }, 60000); 
+        return () => clearInterval(interval);
+      }, []);
     
 
     const getPriorityColor = () => {
